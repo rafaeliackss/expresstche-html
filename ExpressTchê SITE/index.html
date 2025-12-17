@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExpressTchê</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">ExpressTchê.</div>
+      <div class="menu">
+        <a href="#destinos">Destinos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato" class="btn-nav">Fale Conosco</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Descubra o Sul <br />com conforto.</h1>
+        <p>Experiências exclusivas para Canela e Beto Carrero.</p>
+        <a href="#destinos" class="btn-primary">Ver Próximas Saídas</a>
+      </div>
+    </header>
+
+    <section id="destinos" class="container">
+      <div class="section-header">
+        <h2>Próximas Excursões</h2>
+        <p>Selecione seu destino. Assentos limitados a 40 passageiros.</p>
+      </div>
+      <div class="grid-excursoes" id="lista-excursoes"></div>
+    </section>
+
+    <section id="sobre" class="container">
+      <div class="split-layout">
+        <div class="sobre-text">
+          <span class="card-tag">Quem somos</span>
+          <h2>Conectando histórias e destinos.</h2>
+          <p>
+            A ExpressTchê nasceu da necessidade de elevar o padrão do turismo
+            rodoviário no Sul do Brasil. Não vendemos apenas passagens;
+            entregamos segurança, pontualidade e uma experiência inesquecível a
+            bordo.
+          </p>
+          <div class="features">
+            <div class="feature-item">
+              <h3>Segurança</h3>
+              <p>Frota monitorada 24h e motoristas certificados.</p>
+            </div>
+            <div class="feature-item">
+              <h3>Conforto</h3>
+              <p>Poltronas leito, Wi-Fi Starlink e ambiente climatizado.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sobre-img">
+          <img
+            src="onibus.jpg"
+            alt="Interior do Ônibus"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="contact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Fale Conosco</h2>
+          <p>Dúvidas sobre sua reserva ou roteiro? Estamos aqui.</p>
+        </div>
+        <div class="contact-wrapper">
+          <form class="contact-form">
+            <div class="input-group">
+              <label>Nome</label>
+              <input type="text" placeholder="Como podemos te chamar?" />
+            </div>
+            <div class="input-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="Para respondermos" />
+            </div>
+            <div class="input-group">
+              <label>Mensagem</label>
+              <textarea
+                rows="4"
+                placeholder="Sua dúvida ou sugestão..."
+              ></textarea>
+            </div>
+            <button type="button" class="btn-primary full-width">
+              Enviar Mensagem
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div id="modal-reserva" class="modal-overlay hidden">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h3 id="modal-titulo">Destino</h3>
+          <p id="modal-data" style="color: #86868b">Data</p>
+          <div class="seat-counter">
+            <span class="status-dot green"></span>
+            <span id="assentos-restantes">40</span> assentos disponíveis
+          </div>
+        </div>
+
+        <form id="form-cadastro">
+          <div class="input-group">
+            <label>Nome Completo</label>
+            <input type="text" id="nome" placeholder="Seu nome" required />
+          </div>
+          <div class="input-group">
+            <label>CPF</label>
+            <input type="text" id="cpf" placeholder="000.000.000-00" required />
+          </div>
+          <div class="row">
+            <div class="input-group">
+              <label>Telefone</label>
+              <input
+                type="tel"
+                id="telefone"
+                placeholder="(00) 00000-0000"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label>E-mail</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="seu@email.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="payment-section">
+            <h4>Pagamento</h4>
+            <div class="payment-method selected">
+              <span>PIX (Instantâneo)</span>
+              <span class="check">✔</span>
+            </div>
+
+            <div id="pix-area" class="hidden">
+              <div class="pix-container">
+                <p class="pix-instruction">Escaneie para pagar:</p>
+                <img
+                  id="qrcode-img"
+                  src=""
+                  alt="QR Code Pix"
+                  class="qrcode-blur"
+                />
+                <div class="copy-paste">
+                  <span>Chave Pix:</span>
+                  <strong>00.000.000/0001-99</strong>
+                </div>
+              </div>
+
+              <div class="status-box">
+                <div class="loader" id="loader-pagamento"></div>
+                <span id="texto-status">Aguardando pagamento...</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            id="btn-confirmar"
+            class="btn-primary full-width"
+          >
+            Gerar Pagamento Pix
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-sucesso" class="modal-overlay hidden">
+      <div class="modal-content success-card">
+        <div class="success-icon">
+          <svg viewBox="0 0 52 52">
+            <circle
+              cx="26"
+              cy="26"
+              r="25"
+              fill="none"
+              stroke="#34C759"
+              stroke-width="2"
+            />
+            <path
+              fill="none"
+              stroke="#34C759"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14.1 27.2l7.1 7.2 16.7-16.8"
+            />
+          </svg>
+        </div>
+        <h2>Reserva Confirmada!</h2>
+        <p>Bem-vindo a bordo, <strong id="sucesso-nome">passageiro</strong>.</p>
+        <p class="sub-text">
+          Seu voucher e as instruções de embarque foram enviados para o seu
+          e-mail.
+        </p>
+        <button class="btn-primary full-width" onclick="fecharSucesso()">
+          Ótimo!
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 ExpressTchê Viagens. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
